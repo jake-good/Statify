@@ -35,7 +35,7 @@ class App extends Component {
   getData() {
     if (this.state.loggedIn) {
       spotifyApi
-        .getMyTopArtists({ time_range: "long_term" })
+        .getMyTopArtists({ time_range: "short_term" })
         .then(response => this.setState({ topArtists: response.items }));
       //this.getArtistPictures();
     }
@@ -75,7 +75,7 @@ class App extends Component {
     var state = this.generateRandomString(16);
     var stateKey = "spotify_auth_state";
     localStorage.setItem(stateKey, state);
-    var scope = "user-read-private user-read-email";
+    var scope = "user-read-private user-read-email user-top-read";
     var url = "https://accounts.spotify.com/authorize";
     url += "?response_type=token";
     url += "&client_id=" + encodeURIComponent(client_id);
