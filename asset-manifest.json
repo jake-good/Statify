@@ -1,13 +1,13 @@
 {
   "main.css": "/Statify/static/css/main.4807283a.chunk.css",
-  "main.js": "/Statify/static/js/main.9e0c012b.chunk.js",
-  "main.js.map": "/Statify/static/js/main.9e0c012b.chunk.js.map",
+  "main.js": "/Statify/static/js/main.e10358f2.chunk.js",
+  "main.js.map": "/Statify/static/js/main.e10358f2.chunk.js.map",
   "runtime~main.js": "/Statify/static/js/runtime~main.73e1833e.js",
   "runtime~main.js.map": "/Statify/static/js/runtime~main.73e1833e.js.map",
   "static/js/2.60e68fdf.chunk.js": "/Statify/static/js/2.60e68fdf.chunk.js",
   "static/js/2.60e68fdf.chunk.js.map": "/Statify/static/js/2.60e68fdf.chunk.js.map",
   "index.html": "/Statify/index.html",
-  "precache-manifest.31afa40c14aaa4b646e3d2a2797f4e2c.js": "/Statify/precache-manifest.31afa40c14aaa4b646e3d2a2797f4e2c.js",
+  "precache-manifest.48bd61fa5aa0a607209937a1bb2efdab.js": "/Statify/precache-manifest.48bd61fa5aa0a607209937a1bb2efdab.js",
   "service-worker.js": "/Statify/service-worker.js",
   "static/css/main.4807283a.chunk.css.map": "/Statify/static/css/main.4807283a.chunk.css.map"
 }
