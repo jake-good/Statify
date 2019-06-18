@@ -1,20 +1,117 @@
-img {
-  width: 200px;
-  height: 200px;
-  padding: 0;
-  margin: 0;
+button:hover {
+  cursor: pointer;
+  animation: jelly 0.5s;
 }
 
-.imgBox {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
+@keyframes jelly {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    transform: scale(0.95, 1.05);
+  }
+}
+
+p {
+  margin: auto;
+}
+
+.App {
+  text-align: center;
+}
+
+header {
+  padding: 10px;
+}
+
+#main_title {
+  font-size: calc(1em + 3vw);
+  margin: 10px;
+}
+
+#sub_title {
+  font-size: calc(1em + 0.5vw);
+  margin: 5px;
 }
 
 .Artist {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  color: rgb(0, 0, 0);
   width: 100%;
+}
+
+.unexpanded_artist_title :hover {
+  background: #f8f8f8;
+}
+
+.unexpanded_artist_title {
+  font-size: 25px;
+  border-bottom: 5px white;
+}
+
+.expanded_artist {
+  display: flex;
+}
+
+.artist_details {
+  width: calc(100% - 250px);
+  text-align: left;
+}
+
+#expanded_title {
+  margin-top: 5px;
+  margin-left: 9%;
+}
+
+#expand_details {
+  text-align: left;
+  padding-left: 10%;
+  font-size: 1.25rem;
+  line-height: 200%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+span {
+  position: relative;
+  z-index: 1;
+}
+
+span::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: -0.25em;
+  right: -0.25em;
+  background-color: #70533d;
+  transform-origin: bottom center;
+  transform: scaleY(0.1);
+  transition: all 0.1s ease-in-out;
+}
+
+span:hover::before {
+  transform: scaleY(1);
+  background-color: #d8a474;
+}
+
+.img_box {
+  /* Prevent vertical gaps */
+  width: 250px;
+}
+
+.img_box img {
+  /* Just in case there are inline attributes */
+  max-width: 250px !important;
+  height: auto !important;
 }
