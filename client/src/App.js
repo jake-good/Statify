@@ -35,7 +35,7 @@ class App extends Component {
   getData() {
     if (this.state.loggedIn) {
       spotifyApi
-        .getMyTopArtists({ time_range: "short_term" })
+        .getMyTopArtists({ time_range: "long_term" })
         .then(response => this.setState({ topArtists: response.items }));
       //this.getArtistPictures();
     }
