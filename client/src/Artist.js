@@ -12,7 +12,7 @@ class Artist extends React.Component {
     this.setState({
       expanded: !this.state.expanded
     });
-    console.log("toggle");
+    console.log("toggle inner");
   }
 
   render() {

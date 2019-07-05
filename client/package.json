@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://jake-goood.github.io/Statify",
   "dependencies": {
+    "font-awesome": "^4.7.0",
+    "gh-pages": "^2.0.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-scripts": "2.1.8",

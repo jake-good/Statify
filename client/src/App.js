@@ -17,7 +17,10 @@ class App extends Component {
     this.state = {
       loggedIn: token ? true : false,
       nowPlaying: { name: "Not Checked", albumArt: "" },
-      topArtists: []
+      topArtists: [],
+      nresults: "50",
+      time_range: "short_term",
+      expand_all: false
     };
   }
 
@@ -32,13 +35,17 @@ class App extends Component {
     return hashParams;
   }
 
-  getData() {
+  getData(time_range = this.state.time_range) {
     if (this.state.loggedIn) {
       spotifyApi
-        .getMyTopArtists({ time_range: "long_term" })
+        .getMyTopArtists({
+          time_range: time_range,
+          limit: this.state.nresults
+        })
         .then(response => this.setState({ topArtists: response.items }));
       //this.getArtistPictures();
     }
+    console.log("api call");
   }
 
   getArtistPictures() {
@@ -59,6 +66,12 @@ class App extends Component {
     return Artists;
   }
 
+  toggle() {
+    this.setState({
+      expand_all: !this.state.expand_all
+    });
+  }
+
   generateRandomString(length) {
     var text = "";
     var possible =
@@ -69,13 +82,23 @@ class App extends Component {
     return text;
   }
 
+  handleResults(time_range) {
+    this.setState({ time_range: time_range });
+    this.getData(time_range);
+  }
+
+  scrollFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
   redirect() {
     var client_id = "d8c9e8ca3c784898bdf939f51ff6136f"; // Your client id
-    var redirect_uri = "https://jake-good.github.io/Statify/"; // Your redirect uri
+    var redirect_uri = "http://localhost:3000"; // Your redirect uri
     var state = this.generateRandomString(16);
     var stateKey = "spotify_auth_state";
     localStorage.setItem(stateKey, state);
-    var scope = "user-read-private user-read-email user-top-read";
+    var scope = "user-top-read";
     var url = "https://accounts.spotify.com/authorize";
     url += "?response_type=token";
     url += "&client_id=" + encodeURIComponent(client_id);
@@ -86,23 +109,42 @@ class App extends Component {
   }
 
   render() {
+    console.log("re render");
     let Container;
+
     if (!this.state.loggedIn) {
       Container = (
         <button type="button" onClick={() => this.redirect()}>
-          View my top artists
+          Log in to Spotify
         </button>
       );
     } else {
-      this.getData();
-      Container = this.makeArtists();
+      Container = this.makeArtists(this.state.expand_all);
     }
 
     return (
       <div className="App">
         <header>
           <h1 id="main_title">Statify</h1>
-          <h2 id="sub_title">View your top spotify artists!</h2>
+          <h2 id="sub_title">How recent do you want your statistics?</h2>
+          <div className="button_container">
+            <button onClick={() => this.handleResults("short_term")}>
+              1 month
+            </button>
+            <button onClick={() => this.handleResults("medium_term")}>
+              3 months
+            </button>
+            <button onClick={() => this.handleResults("long_term")}>
+              Several years
+            </button>
+          </div>
+          <button
+            title="Return to top"
+            className="expand_button"
+            onClick={() => this.scrollFunction()}
+          >
+            <i className="fa fa-angle-up fa-2x" />
+          </button>
         </header>
         {Container}
       </div>
