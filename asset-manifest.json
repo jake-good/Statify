@@ -1,16 +1,16 @@
 {
-  "main.css": "/Statify/static/css/main.f514ffe0.chunk.css",
-  "main.js": "/Statify/static/js/main.54b20bbc.chunk.js",
-  "main.js.map": "/Statify/static/js/main.54b20bbc.chunk.js.map",
+  "main.css": "/Statify/static/css/main.a3e0cc08.chunk.css",
+  "main.js": "/Statify/static/js/main.45d79d70.chunk.js",
+  "main.js.map": "/Statify/static/js/main.45d79d70.chunk.js.map",
   "runtime~main.js": "/Statify/static/js/runtime~main.73e1833e.js",
   "runtime~main.js.map": "/Statify/static/js/runtime~main.73e1833e.js.map",
   "static/css/2.106f6b78.chunk.css": "/Statify/static/css/2.106f6b78.chunk.css",
   "static/js/2.79f7f0dc.chunk.js": "/Statify/static/js/2.79f7f0dc.chunk.js",
   "static/js/2.79f7f0dc.chunk.js.map": "/Statify/static/js/2.79f7f0dc.chunk.js.map",
   "index.html": "/Statify/index.html",
-  "precache-manifest.8aff291b1fad4d99abb95db86f2ec478.js": "/Statify/precache-manifest.8aff291b1fad4d99abb95db86f2ec478.js",
+  "precache-manifest.5157157a86ab82bc2e143eefd07db35b.js": "/Statify/precache-manifest.5157157a86ab82bc2e143eefd07db35b.js",
   "service-worker.js": "/Statify/service-worker.js",
   "static/css/2.106f6b78.chunk.css.map": "/Statify/static/css/2.106f6b78.chunk.css.map",
-  "static/css/main.f514ffe0.chunk.css.map": "/Statify/static/css/main.f514ffe0.chunk.css.map",
+  "static/css/main.a3e0cc08.chunk.css.map": "/Statify/static/css/main.a3e0cc08.chunk.css.map",
   "static/media/font-awesome.min.css": "/Statify/static/media/fontawesome-webfont.fee66e71.woff"
 }
