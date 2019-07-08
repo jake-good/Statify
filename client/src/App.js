@@ -105,7 +105,7 @@ class App extends Component {
 
   redirect() {
     var client_id = "d8c9e8ca3c784898bdf939f51ff6136f"; // Your client id
-    var redirect_uri = "http://localhost:3000"; // Your redirect uri
+    var redirect_uri = "https://jake-good.github.io/Statify/"; // Your redirect uri
     var state = this.generateRandomString(16);
     var stateKey = "spotify_auth_state";
     localStorage.setItem(stateKey, state);
