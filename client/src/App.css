@@ -5,12 +5,15 @@ button {
 
 button:hover {
   cursor: pointer;
-  background-color: #1aa14a;
+  background-color: #1db954;
+  color: white;
+  border: none;
 }
 
 button:focus {
   outline: 0;
 }
+
 .button_container {
   display: flex;
   flex-direction: row;
@@ -51,6 +54,39 @@ button:focus {
   border: none;
 }
 
+.login_container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 0px auto;
+}
+
+.login_container #main_title {
+  padding-top: 15%;
+  font-size: calc(5vw + 5em);
+}
+
+.login_info_text {
+  margin-top: 55px;
+  width: 60%;
+  color: #838383;
+  font-size: 0.95em;
+  line-height: 1.5em;
+}
+
+.login_button {
+  border-radius: 50px;
+  border: 1px black solid;
+  padding: 1em 3em;
+  color: black;
+  background-color: white;
+  font-weight: 600;
+  margin-top: 40px;
+}
+
 p {
   margin: 0;
 }
@@ -79,7 +115,7 @@ p {
 }
 
 .Artist :hover {
-  background: #dadada;
+  background: #f7f7f7;
   cursor: pointer;
 }
 
@@ -87,6 +123,9 @@ p {
   font-size: 30px;
   height: 1.7em;
   font-weight: 200;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .expanded_artist {
@@ -100,42 +139,29 @@ p {
 
 #expanded_title {
   margin-top: 5px;
-  margin-left: 9%;
+  margin-left: 4%;
+  color: #1db954;
+  font-size: 2.4em;
 }
 
 #expand_details {
   text-align: left;
-  padding-left: 10%;
-  font-size: 1.25rem;
+  padding-left: 5%;
+  font-size: 1.1em;
   line-height: 200%;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-span {
-  position: relative;
-  z-index: 1;
-}
-
-span::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  bottom: 0;
-  left: -0.25em;
-  right: -0.25em;
+#spotify_link_button {
   background-color: #1db954;
-  transform-origin: bottom center;
-  transform: scaleY(0.1);
-  transition: all 0.1s ease-in-out;
+  width: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
 }
 
-span:hover::before {
-  transform: scaleY(1);
+#spotify_link_button i {
+  color: black;
   background-color: #1db954;
 }
 

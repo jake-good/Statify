@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Artist from "./Artist";
+import Login from "./Login";
 
 import SpotifyWebApi from "spotify-web-api-js";
 const spotifyApi = new SpotifyWebApi();
@@ -92,6 +93,16 @@ class App extends Component {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
+  componentDidMount() {
+    if (process.env.BROWSER) {
+      document.addEventListener(
+        "scroll",
+        e => this._handleOnScrollDocument(e),
+        true
+      );
+    }
+  }
+
   redirect() {
     var client_id = "d8c9e8ca3c784898bdf939f51ff6136f"; // Your client id
     var redirect_uri = "http://localhost:3000"; // Your redirect uri
@@ -111,19 +122,18 @@ class App extends Component {
   render() {
     console.log("re render");
     let Container;
+    let Head;
+    let scrollButton;
 
     if (!this.state.loggedIn) {
       Container = (
-        <button type="button" onClick={() => this.redirect()}>
-          Log in to Spotify
-        </button>
+        <div>
+          <Login redirect={() => this.redirect()} />
+        </div>
       );
     } else {
       Container = this.makeArtists(this.state.expand_all);
-    }
-
-    return (
-      <div className="App">
+      Head = (
         <header>
           <h1 id="main_title">Statify</h1>
           <h2 id="sub_title">How recent do you want your statistics?</h2>
@@ -138,14 +148,31 @@ class App extends Component {
               Several years
             </button>
           </div>
-          <button
-            title="Return to top"
-            className="expand_button"
-            onClick={() => this.scrollFunction()}
-          >
-            <i className="fa fa-angle-up fa-2x" />
-          </button>
+
+          {scrollButton}
         </header>
+      );
+    }
+
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      scrollButton = (
+        <button
+          title="Return to top "
+          className="expand_button"
+          onClick={() => this.scrollFunction()}
+        >
+          <i className="fa fa-angle-up fa-2x" />
+        </button>
+      );
+      console.log("scrolled");
+    }
+
+    return (
+      <div className="App">
+        {Head}
         {Container}
       </div>
     );
