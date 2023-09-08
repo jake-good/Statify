@@ -119,6 +119,11 @@ class App extends Component {
     window.location = url;
   }
 
+  logout() {
+    window.location.hash = '';
+    this.setState({ loggedIn: false })
+  }
+
   render() {
     console.log("re render");
     let Container;
@@ -136,6 +141,7 @@ class App extends Component {
       Head = (
         <header>
           <h1 id="main_title">Statify</h1>
+          <button onClick={() => this.logout()} ></button>
           <h2 id="sub_title">How recent do you want your statistics?</h2>
           <div className="button_container">
             <button onClick={() => this.handleResults("short_term")}>
