@@ -120,6 +120,11 @@ class App extends Component {
     window.location = url;
   }
 
+  logout() {
+    window.location.hash = '';
+    this.setState({ loggedIn: false});
+  }
+
   render() {
     console.log("re render");
     let Container;
@@ -138,6 +143,7 @@ class App extends Component {
         <header>
           <h1 id="main_title">Statify</h1>
           <h2 id="sub_title">How recent do you want your statistics?</h2>
+          <button onClick={() => this.logout()}>Log out</button>
           <div className="button_container">
             <button onClick={() => this.handleResults("short_term")}>
               1 month
