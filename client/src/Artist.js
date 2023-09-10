@@ -43,6 +43,7 @@ class Artist extends React.Component {
           <a
             id="spotify_link_button"
             href={this.props.artist.external_urls.spotify}
+            target="blank"
             title="Go to artist's spotify page"
           >
             <i className="fa fa-spotify fa-2x" />
