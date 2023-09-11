@@ -17,7 +17,7 @@ class Login extends React.Component {
           used for authentication. To find out your listening info click the
           button below and log in to your account.
         </p>
-        <button className="login_button" onClick={this.props.redirect}>
+        <button className="login_button buttonDefault" onClick={this.props.redirect}>
           GO TO SPOTIFY LOGIN
         </button>
       </div>
