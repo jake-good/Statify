@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Artist from "./Artist";
 import Login from "./Login";
+import Footer from "./Footer";
 
 import SpotifyWebApi from "spotify-web-api-js";
 const spotifyApi = new SpotifyWebApi();
@@ -121,7 +122,7 @@ class App extends Component {
 
   logout() {
     window.location.hash = '';
-    this.setState({ loggedIn: false })
+    this.setState({ loggedIn: false});
   }
 
   render() {
@@ -143,6 +144,7 @@ class App extends Component {
           <h1 id="main_title">Statify</h1>
           <button onClick={() => this.logout()} ></button>
           <h2 id="sub_title">How recent do you want your statistics?</h2>
+          <button onClick={() => this.logout()}>Log out</button>
           <div className="button_container">
             <button onClick={() => this.handleResults("short_term")}>
               1 month
@@ -180,6 +182,7 @@ class App extends Component {
       <div className="App">
         {Head}
         {Container}
+        <Footer />
       </div>
     );
   }
