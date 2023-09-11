@@ -1,17 +1,38 @@
-button {
-  background-color: #1db954;
+.buttonDefault {
+  background-color: white;
   color: black;
+  border: 1px black solid;
+  border-radius: 10%;
 }
 
-button:hover {
-  cursor: pointer;
+.buttonDefault:hover {
   background-color: #1db954;
   color: white;
-  border: none;
+  border: 1px #1db954 solid;
+  cursor: pointer;
 }
 
-button:focus {
-  outline: 0;
+.buttonInverse {
+  background-color: #1db954;
+  color: white;
+  border: 1px #1db954 solid;
+  border-radius: 40%;
+}
+
+.buttonInverse:hover {
+  background-color: white;
+  color: black;
+  border: 1px black solid;
+  cursor: pointer;
+}
+
+.logoutButton {
+  top: 20px;
+  right: 20px;
+  width: 90px;
+  height: 2em;
+  position: absolute;
+  border-radius: 20px;
 }
 
 .button_container {
@@ -24,17 +45,9 @@ button:focus {
 
 .button_container button {
   border-radius: 20px;
-  border: 1px black solid;
-  background-color: white;
   width: 20%;
   height: 2em;
   font-weight: 500;
-}
-
-.button_container button:hover {
-  background-color: #1db954;
-  color: white;
-  border-color: #1db954;
 }
 
 .button_container button:focus {

@@ -106,7 +106,7 @@ class App extends Component {
 
   redirect() {
     var client_id = "d8c9e8ca3c784898bdf939f51ff6136f"; // Your client id
-    var redirect_uri = "https://jake-good.github.io/Statify/"; // Your redirect uri
+    var redirect_uri = window.location.href;
     var state = this.generateRandomString(16);
     var stateKey = "spotify_auth_state";
     localStorage.setItem(stateKey, state);
@@ -118,6 +118,11 @@ class App extends Component {
     url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
     url += "&state=" + encodeURIComponent(state);
     window.location = url;
+  }
+
+  logout() {
+    window.location.hash = '';
+    this.setState({ loggedIn: false});
   }
 
   render() {
@@ -136,16 +141,19 @@ class App extends Component {
       Container = this.makeArtists(this.state.expand_all);
       Head = (
         <header>
-          <h1 id="main_title">Statify</h1>
+          <div className="headerDiv">
+            <h1 id="main_title">Statify</h1>
+            <button className="buttonInverse logoutButton" onClick={() => this.logout()}>Log out</button>
+          </div>
           <h2 id="sub_title">How recent do you want your statistics?</h2>
           <div className="button_container">
-            <button onClick={() => this.handleResults("short_term")}>
+            <button className="buttonDefault" onClick={() => this.handleResults("short_term")}>
               1 month
             </button>
-            <button onClick={() => this.handleResults("medium_term")}>
+            <button className="buttonDefault" onClick={() => this.handleResults("medium_term")}>
               3 months
             </button>
-            <button onClick={() => this.handleResults("long_term")}>
+            <button className="buttonDefault" onClick={() => this.handleResults("long_term")}>
               Several years
             </button>
           </div>
