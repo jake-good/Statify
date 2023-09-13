@@ -1,0 +1,12 @@
+.buttonDefault {
+  background-color: white;
+  color: black;
+  border: 1px black solid;
+}
+.buttonDefault:hover,
+.buttonDefault.selected {
+  background-color: #1db954;
+  color: white;
+  border: 1px #1db954 solid;
+  cursor: pointer;
+}

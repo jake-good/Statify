@@ -2,7 +2,6 @@
   background-color: white;
   color: black;
   border: 1px black solid;
-  border-radius: 10%;
 }
 
 .buttonDefault:hover {
@@ -48,12 +47,6 @@
   width: 20%;
   height: 2em;
   font-weight: 500;
-}
-
-.button_container button:focus {
-  background-color: #1db954;
-  color: white;
-  border-color: #1db954;
 }
 
 .expand_button {

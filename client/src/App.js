@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import "./App2.css";
 import Artist from "./Artist";
 import Login from "./Login";
 import Footer from "./Footer";
@@ -13,12 +14,10 @@ class App extends Component {
     const params = this.getHashParams();
     const token = params.access_token;
     if (token) {
-      console.log("got token");
       spotifyApi.setAccessToken(token);
     }
     this.state = {
       loggedIn: token ? true : false,
-      nowPlaying: { name: "Not Checked", albumArt: "" },
       topArtists: [],
       nresults: "50",
       time_range: "short_term",
@@ -47,7 +46,6 @@ class App extends Component {
         .then(response => this.setState({ topArtists: response.items }));
       //this.getArtistPictures();
     }
-    console.log("api call");
   }
 
   getArtistPictures() {
@@ -84,26 +82,6 @@ class App extends Component {
     return text;
   }
 
-  handleResults(time_range) {
-    this.setState({ time_range: time_range });
-    this.getData(time_range);
-  }
-
-  scrollFunction() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  }
-
-  componentDidMount() {
-    if (process.env.BROWSER) {
-      document.addEventListener(
-        "scroll",
-        e => this._handleOnScrollDocument(e),
-        true
-      );
-    }
-  }
-
   redirect() {
     var client_id = "d8c9e8ca3c784898bdf939f51ff6136f"; // Your client id
     var redirect_uri = window.location.href;
@@ -118,6 +96,11 @@ class App extends Component {
     url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
     url += "&state=" + encodeURIComponent(state);
     window.location = url;
+  }
+
+  updateTimeRange(timeRange) {
+    this.setState({time_range: timeRange});
+    this.getData();
   }
 
   logout() {
@@ -138,6 +121,9 @@ class App extends Component {
         </div>
       );
     } else {
+      if (this.state.topArtists.length == 0) {
+        this.getData();
+      }
       Container = this.makeArtists(this.state.expand_all);
       Head = (
         <header>
@@ -147,13 +133,13 @@ class App extends Component {
           </div>
           <h2 id="sub_title">How recent do you want your statistics?</h2>
           <div className="button_container">
-            <button className="buttonDefault" onClick={() => this.handleResults("short_term")}>
+            <button className={(this.state.time_range == 'short_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("short_term")}>
               1 month
             </button>
-            <button className="buttonDefault" onClick={() => this.handleResults("medium_term")}>
+            <button className={(this.state.time_range == 'medium_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("medium_term")}>
               3 months
             </button>
-            <button className="buttonDefault" onClick={() => this.handleResults("long_term")}>
+            <button className={(this.state.time_range == 'long_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("long_term")}>
               Several years
             </button>
           </div>
@@ -161,22 +147,6 @@ class App extends Component {
           {scrollButton}
         </header>
       );
-    }
-
-    if (
-      document.body.scrollTop > 20 ||
-      document.documentElement.scrollTop > 20
-    ) {
-      scrollButton = (
-        <button
-          title="Return to top "
-          className="expand_button"
-          onClick={() => this.scrollFunction()}
-        >
-          <i className="fa fa-angle-up fa-2x" />
-        </button>
-      );
-      console.log("scrolled");
     }
 
     return (
