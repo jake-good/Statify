@@ -10,7 +10,7 @@ class Footer extends React.Component {
     return (
       <footer id="main_footer">
         <p>
-          Created by <a href="#">Jake Good</a>
+          Created by <a href="https://github.com/jake-good/Statify" target="_blank" rel="noreferrer noopener">Jake Good</a>
         </p>
         <a>
           <i className="fa fa-github" />
