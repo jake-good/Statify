@@ -99,8 +99,7 @@ class App extends Component {
   }
 
   updateTimeRange(timeRange) {
-    this.setState({time_range: timeRange});
-    this.getData();
+    this.setState({time_range: timeRange}, () => this.getData());
   }
 
   logout() {
