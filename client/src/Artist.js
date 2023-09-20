@@ -12,11 +12,11 @@ class Artist extends React.Component {
     this.setState({
       expanded: !this.state.expanded
     });
-    console.log("toggle inner");
   }
 
   render() {
     let container;
+    
     if (!this.state.expanded) {
       container = (
         <div className="unexpanded_artist_title">

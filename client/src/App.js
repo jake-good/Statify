@@ -66,12 +66,6 @@ class App extends Component {
     return Artists;
   }
 
-  toggle() {
-    this.setState({
-      expand_all: !this.state.expand_all
-    });
-  }
-
   generateRandomString(length) {
     var text = "";
     var possible =
@@ -108,7 +102,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("re render");
     let Container;
     let Head;
     let scrollButton;
@@ -120,7 +113,7 @@ class App extends Component {
         </div>
       );
     } else {
-      if (this.state.topArtists.length == 0) {
+      if (this.state.topArtists.length === 0) {
         this.getData();
       }
       Container = this.makeArtists(this.state.expand_all);
@@ -132,13 +125,13 @@ class App extends Component {
           </div>
           <h2 id="sub_title">How recent do you want your statistics?</h2>
           <div className="button_container">
-            <button className={(this.state.time_range == 'short_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("short_term")}>
+            <button className={(this.state.time_range === 'short_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("short_term")}>
               1 month
             </button>
-            <button className={(this.state.time_range == 'medium_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("medium_term")}>
+            <button className={(this.state.time_range === 'medium_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("medium_term")}>
               3 months
             </button>
-            <button className={(this.state.time_range == 'long_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("long_term")}>
+            <button className={(this.state.time_range === 'long_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("long_term")}>
               Several years
             </button>
           </div>
