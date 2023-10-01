@@ -4,8 +4,10 @@ import "./App2.css";
 import Artist from "./Artist";
 import Login from "./Login";
 import Footer from "./Footer";
+import ClipLoader from 'react-spinners/ClipLoader'
 
 import SpotifyWebApi from "spotify-web-api-js";
+import { getTopArtists } from './spotifyApiClient';
 const spotifyApi = new SpotifyWebApi();
 
 class App extends Component {
@@ -21,8 +23,12 @@ class App extends Component {
       topArtists: [],
       nresults: "50",
       time_range: "short_term",
-      expand_all: false
+      loading: false
     };
+  }
+
+  componentDidMount() {
+    this.getTopArtistData();
   }
 
   getHashParams() {
@@ -36,64 +42,25 @@ class App extends Component {
     return hashParams;
   }
 
-  getData(time_range = this.state.time_range) {
+  getTopArtistData(time_range = this.state.time_range) {
     if (this.state.loggedIn) {
-      spotifyApi
-        .getMyTopArtists({
-          time_range: time_range,
-          limit: this.state.nresults
-        })
-        .then(response => this.setState({ topArtists: response.items }));
-      //this.getArtistPictures();
+      this.setState({ loading: true });
+
+      getTopArtists(this.state.time_range)
+        .then(response => {
+          this.setState({ topArtists: response.items });
+          this.setState({ loading: false });
+        });
     }
   }
 
-  getArtistPictures() {
-    let images = "";
-    if (this.state.loggedIn) {
-      let artistArray = this.state.topArtists;
-      let artistImageURLs = [];
-      for (let i = 0; i < artistArray.length; i++) {
-        artistImageURLs.push(artistArray[i].images[0].url);
-      }
-      images = artistImageURLs.map(url => <img src={url} />);
-    }
-    return images;
-  }
-
-  makeArtists() {
+  buildArtists() {
     let Artists = this.state.topArtists.map(item => <Artist artist={item} key={item.id+Date.now()}/>);
     return Artists;
   }
 
-  generateRandomString(length) {
-    var text = "";
-    var possible =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < length; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
-  }
-
-  redirect() {
-    var client_id = "d8c9e8ca3c784898bdf939f51ff6136f"; // Your client id
-    var redirect_uri = window.location.href;
-    var state = this.generateRandomString(16);
-    var stateKey = "spotify_auth_state";
-    localStorage.setItem(stateKey, state);
-    var scope = "user-top-read";
-    var url = "https://accounts.spotify.com/authorize";
-    url += "?response_type=token";
-    url += "&client_id=" + encodeURIComponent(client_id);
-    url += "&scope=" + encodeURIComponent(scope);
-    url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
-    url += "&state=" + encodeURIComponent(state);
-    window.location = url;
-  }
-
   updateTimeRange(timeRange) {
-    this.setState({time_range: timeRange}, () => this.getData());
+    this.setState({time_range: timeRange}, () => this.getTopArtistData());
   }
 
   logout() {
@@ -109,14 +76,11 @@ class App extends Component {
     if (!this.state.loggedIn) {
       Container = (
         <div>
-          <Login redirect={() => this.redirect()} />
+          <Login/>
         </div>
       );
     } else {
-      if (this.state.topArtists.length === 0) {
-        this.getData();
-      }
-      Container = this.makeArtists(this.state.expand_all);
+      Container = this.buildArtists(this.state.expand_all);
       Head = (
         <header>
           <div className="headerDiv">
@@ -144,7 +108,7 @@ class App extends Component {
     return (
       <div className="App">
         {Head}
-        {Container}
+        {this.state.loading ? <ClipLoader color={'#1db954'} size={20}/> : Container}
         <Footer />
       </div>
     );
