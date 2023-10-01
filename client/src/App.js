@@ -62,7 +62,7 @@ class App extends Component {
   }
 
   makeArtists() {
-    let Artists = this.state.topArtists.map(item => <Artist artist={item} />);
+    let Artists = this.state.topArtists.map(item => <Artist artist={item} key={item.id+Date.now()}/>);
     return Artists;
   }
 
