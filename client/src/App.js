@@ -56,7 +56,7 @@ class App extends Component {
 
   buildArtists() {
     let Artists = this.state.topArtists.map(item => <Artist artist={item} key={item.id+Date.now()}/>);
-    return Artists;
+  return <div className="artists-container" >{Artists}</div>;
   }
 
   updateTimeRange(timeRange) {
@@ -80,28 +80,28 @@ class App extends Component {
         </div>
       );
     } else {
-      Container = this.buildArtists(this.state.expand_all);
+      Container = this.buildArtists();
       Head = (
-        <header>
           <div className="headerDiv">
             <h1 id="main_title">Statify</h1>
+            <div>
+              <h2 id="sub_title">How recent do you want your statistics?</h2>
+              <div className="button_container">
+                <button className={(this.state.time_range === 'short_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("short_term")}>
+                  1 month
+                </button>
+                <button className={(this.state.time_range === 'medium_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("medium_term")}>
+                  3 months
+                </button>
+                <button className={(this.state.time_range === 'long_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("long_term")}>
+                  Several years
+                </button>
+              </div>
+            </div>
+            
             <button className="buttonInverse logoutButton" onClick={() => this.logout()}>Log out</button>
           </div>
-          <h2 id="sub_title">How recent do you want your statistics?</h2>
-          <div className="button_container">
-            <button className={(this.state.time_range === 'short_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("short_term")}>
-              1 month
-            </button>
-            <button className={(this.state.time_range === 'medium_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("medium_term")}>
-              3 months
-            </button>
-            <button className={(this.state.time_range === 'long_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => this.updateTimeRange("long_term")}>
-              Several years
-            </button>
-          </div>
-
-          {scrollButton}
-        </header>
+          
       );
     }
 
