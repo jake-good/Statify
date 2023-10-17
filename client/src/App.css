@@ -1,3 +1,29 @@
+.App {
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.header {
+
+}
+
+.artists-container {
+  overflow-y: auto;
+  width: 95%;
+  margin: 0px auto;
+}
+
+#footer {
+  padding: 15px 0;
+  width: 100%;
+  text-align: center;
+  color: #555;
+  line-height: 1.5;
+  font-size: 0.8em;
+}
+
 .buttonDefault {
   background-color: white;
   color: black;
@@ -111,7 +137,7 @@ p {
 
 #sub_title {
   font-size: calc(1em + 0.5vw);
-  margin: 5px;
+  margin: 10px;
   font-weight: 200;
 }
 
@@ -183,15 +209,6 @@ p {
   /* Just in case there are inline attributes */
   max-width: 250px !important;
   height: auto !important;
-}
-
-#main_footer {
-  padding: 30px 0;
-  width: 100%;
-  text-align: center;
-  color: #555;
-  line-height: 1.5;
-  font-size: 0.8em;
 }
 
 @media (max-width: 1000px) {

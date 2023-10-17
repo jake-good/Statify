@@ -4,7 +4,8 @@ import "./App2.css";
 import Artist from "./Artist";
 import Login from "./Login";
 import Footer from "./Footer";
-import ClipLoader from 'react-spinners/ClipLoader'
+import ClipLoader from 'react-spinners/ClipLoader';
+import ScrollBar from 'react-scrollbars-custom';
 
 import SpotifyWebApi from "spotify-web-api-js";
 import { getTopArtists } from './spotifyApiClient';
@@ -56,7 +57,7 @@ class App extends Component {
 
   buildArtists() {
     let Artists = this.state.topArtists.map(item => <Artist artist={item} key={item.id+Date.now()}/>);
-  return <div className="artists-container" >{Artists}</div>;
+    return Artists;
   }
 
   updateTimeRange(timeRange) {
@@ -71,7 +72,6 @@ class App extends Component {
   render() {
     let Container;
     let Head;
-    let scrollButton;
 
     if (!this.state.loggedIn) {
       Container = (
@@ -80,9 +80,13 @@ class App extends Component {
         </div>
       );
     } else {
-      Container = this.buildArtists();
+      Container = <div className="artists-container">
+        {
+          this.state.loading ? <ClipLoader color={'#1db954'} size={20}/> : <ScrollBar>{this.buildArtists()}</ScrollBar>
+        }
+        </div>
       Head = (
-          <div className="headerDiv">
+          <div className="header">
             <h1 id="main_title">Statify</h1>
             <div>
               <h2 id="sub_title">How recent do you want your statistics?</h2>
@@ -108,7 +112,7 @@ class App extends Component {
     return (
       <div className="App">
         {Head}
-        {this.state.loading ? <ClipLoader color={'#1db954'} size={20}/> : Container}
+        {Container}
         <Footer />
       </div>
     );

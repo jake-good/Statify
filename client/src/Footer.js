@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.css";
 
 class Footer extends React.Component {
   constructor() {
@@ -8,7 +9,7 @@ class Footer extends React.Component {
 
   render() {
     return (
-      <footer id="main_footer">
+      <div id="footer">
         <p>
           Created by <a href="https://github.com/jake-good/Statify" target="_blank" rel="noreferrer noopener">Jake Good</a>
         </p>
@@ -18,7 +19,7 @@ class Footer extends React.Component {
         <a>
           <i className="fa fa-person" />
         </a>
-      </footer>
+      </div>
     );
   }
 }

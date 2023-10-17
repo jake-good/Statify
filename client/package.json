@@ -9,7 +9,8 @@
     "less": "^4.2.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8",
+    "react-scripts": "^5.0.1",
+    "react-scrollbars-custom": "^4.1.1",
     "react-spinners": "^0.13.8",
     "spotify-web-api-js": "1.2.0"
   },
