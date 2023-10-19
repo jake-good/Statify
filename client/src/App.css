@@ -24,6 +24,10 @@
   font-size: 0.8em;
 }
 
+#footer i {
+  padding: 0px 3px;
+}
+
 .buttonDefault {
   background-color: white;
   color: black;
