@@ -1,16 +1,18 @@
 {
-  "main.css": "/Statify/static/css/main.b3bb9ec2.chunk.css",
-  "main.js": "/Statify/static/js/main.177b7ee1.chunk.js",
-  "main.js.map": "/Statify/static/js/main.177b7ee1.chunk.js.map",
-  "runtime~main.js": "/Statify/static/js/runtime~main.73e1833e.js",
-  "runtime~main.js.map": "/Statify/static/js/runtime~main.73e1833e.js.map",
-  "static/css/2.1ff9e0a9.chunk.css": "/Statify/static/css/2.1ff9e0a9.chunk.css",
-  "static/js/2.ec86cdf8.chunk.js": "/Statify/static/js/2.ec86cdf8.chunk.js",
-  "static/js/2.ec86cdf8.chunk.js.map": "/Statify/static/js/2.ec86cdf8.chunk.js.map",
-  "index.html": "/Statify/index.html",
-  "precache-manifest.364af20cb3942152d698cfd3117fda7c.js": "/Statify/precache-manifest.364af20cb3942152d698cfd3117fda7c.js",
-  "service-worker.js": "/Statify/service-worker.js",
-  "static/css/2.1ff9e0a9.chunk.css.map": "/Statify/static/css/2.1ff9e0a9.chunk.css.map",
-  "static/css/main.b3bb9ec2.chunk.css.map": "/Statify/static/css/main.b3bb9ec2.chunk.css.map",
-  "static/media/font-awesome.min.css": "/Statify/static/media/fontawesome-webfont.fee66e71.woff"
+  "files": {
+    "main.css": "/Statify/static/css/main.91c13e9f.css",
+    "main.js": "/Statify/static/js/main.2c89b69f.js",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/Statify/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/fontawesome-webfont.eot": "/Statify/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/Statify/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/Statify/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/Statify/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "index.html": "/Statify/index.html",
+    "main.91c13e9f.css.map": "/Statify/static/css/main.91c13e9f.css.map",
+    "main.2c89b69f.js.map": "/Statify/static/js/main.2c89b69f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.91c13e9f.css",
+    "static/js/main.2c89b69f.js"
+  ]
 }
