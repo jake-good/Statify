@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Artist from './../Artist';
+import Artist from '../components/Artist';
 import Footer from './../Footer';
 import ClipLoader from 'react-spinners/ClipLoader';
 import ScrollBar from 'react-scrollbars-custom';
 import SpotifyWebApi from "spotify-web-api-js";
 import { getTopArtists } from './../spotifyApiClient';
-import "./../App2.css";
-
 
 export default function Stats() {
     const [topArtists, setTopArtists] = useState([]);
@@ -15,7 +13,6 @@ export default function Stats() {
     const [loading, setLoading] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const navigate = useNavigate();
-
 
     useEffect(() => {
         if (loggedIn) {
@@ -29,10 +26,8 @@ export default function Stats() {
     },[loggedIn, timeRange]);
 
     const spotifyApi = new SpotifyWebApi();
-
     const params = getHashParams();
     const token = params.access_token;
-
     if (token && !loggedIn) {
       spotifyApi.setAccessToken(token);
       setLoggedIn(true);
