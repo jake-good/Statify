@@ -16,7 +16,6 @@ class App extends Component {
   constructor() {
     super();
 
-    // test comment
     const params = this.getHashParams();
     const token = params.access_token;
     if (token) {
