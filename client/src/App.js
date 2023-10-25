@@ -7,7 +7,6 @@ import Footer from "./Footer";
 import ClipLoader from 'react-spinners/ClipLoader';
 import ScrollBar from 'react-scrollbars-custom';
 
-
 import SpotifyWebApi from "spotify-web-api-js";
 import { getTopArtists } from './spotifyApiClient';
 const spotifyApi = new SpotifyWebApi();

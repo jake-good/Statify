@@ -3,7 +3,7 @@ const spotifyApi = new SpotifyWebApi();
 
 export async function login() {
     var client_id = "d8c9e8ca3c784898bdf939f51ff6136f"; // Your client id
-    var redirect_uri = window.location.href;
+    var redirect_uri = window.location.href + 'stats';
     var state = generateRandomString(16);
     var stateKey = "spotify_auth_state";
     localStorage.setItem(stateKey, state);
