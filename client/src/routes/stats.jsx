@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Artist from './../Artist';
-import Login from './../Login';
 import Footer from './../Footer';
 import ClipLoader from 'react-spinners/ClipLoader';
 import ScrollBar from 'react-scrollbars-custom';
@@ -12,19 +11,22 @@ import "./../App2.css";
 
 export default function Stats() {
     const [topArtists, setTopArtists] = useState([]);
-    const [timeRange, setTimeRange] = useState('');
+    const [timeRange, setTimeRange] = useState('medium_term');
     const [loading, setLoading] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
-        setLoading(true);
-        getTopArtists(timeRange)
-            .then(response => {
-            setTopArtists(response.items);
-            setLoading(false);
-            });
-        
-    },[timeRange]);
+        if (loggedIn) {
+            setLoading(true);
+            getTopArtists(timeRange)
+                .then(response => {
+                setTopArtists(response.items);
+                setLoading(false);
+                });
+        }
+    },[loggedIn, timeRange]);
 
     const spotifyApi = new SpotifyWebApi();
 
@@ -41,19 +43,10 @@ export default function Stats() {
         return Artists;
     }
 
-    function updateTimeRange(timeRange) {
-        setTimeRange(timeRange); 
-    }
-
     let Container;
     let Head;
-    if (!timeRange.length) setTimeRange('medium_term')
     if (!loggedIn) {
-      Container = (
-        <div>
-          <Login/>
-        </div>
-      );
+      navigate('/');
     } else {
       Container = <div className="artists-container">
         {
@@ -66,13 +59,13 @@ export default function Stats() {
             <div>
               <h2 id="sub_title">How recent do you want your statistics?</h2>
               <div className="button_container">
-                <button className={(timeRange === 'short_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => updateTimeRange("short_term")}>
+                <button className={(timeRange === 'short_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => setTimeRange("short_term")}>
                   1 month
                 </button>
-                <button className={(timeRange === 'medium_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => updateTimeRange("medium_term")}>
+                <button className={(timeRange === 'medium_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => setTimeRange("medium_term")}>
                   3 months
                 </button>
-                <button className={(timeRange === 'long_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => updateTimeRange("long_term")}>
+                <button className={(timeRange === 'long_term' ? 'selected ' : '') + "buttonDefault"} onClick={() => setTimeRange("long_term")}>
                   Several years
                 </button>
               </div>
