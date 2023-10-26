@@ -5,30 +5,6 @@ type Props = {
     artist: SpotifyApi.ArtistObjectFull;
 }
 
-type ArtistData = {
-    name: string;
-    external_urls: ExternalUrls;
-    followers: Followers,
-    genres: string[];
-    href: string;
-    id: string;
-    images: Image[];
-    popularity: number;
-    uri: string;
-}
-
-type Followers = {
-    total: string;
-}
-
-type ExternalUrls = {
-    spotify: string;
-}
-
-type Image = {
-    url: string;
-}
-
 export default function Artist({ artist }: Props): React.JSX.Element {
     const [expanded, setExpanded] = useState(false);
 
