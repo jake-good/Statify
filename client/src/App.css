@@ -304,6 +304,24 @@ p {
   }
 }
 
+.errorPageDiv {
+  height: 80vh;
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  align-content: space-around;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.errorPageDiv button {
+  border-radius: 20px;
+  width: 20%;
+  height: 2em;
+  font-weight: 500;
+}
+
 body {
   margin: 0;
   padding: 0;

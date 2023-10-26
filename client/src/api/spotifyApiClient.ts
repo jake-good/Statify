@@ -71,12 +71,19 @@ export class SpotifyApiClient {
     }
   
     const body = await fetch(url, payload);
-    const response =await body.json();
+    const response = await body.json();
+    if (response.access_token == null) {
+      throw new Error('failed to fetch token');
+    }
     localStorage.setItem('access_token', response.access_token);
   }  
 
   getTopArtist = async (timeRange: string) => {
     const token = localStorage.getItem('access_token');
+
+    if (token == null) {
+      throw new Error('Unable to find access token, try loggin in again');
+    }
     
     const apiUrl = 'https://api.spotify.com/v1/me/top/artists';
     const limit = 50;
@@ -89,11 +96,7 @@ export class SpotifyApiClient {
     };
 
     const response = await fetch(url, { method: 'GET', headers });
-    if (response.status === 200) {
-      const data = await response.json();
-      return data.items;
-    } else {
-      console.error(`Error: ${response.status} - ${await response.text()}`);
-    }
+    const data = await response.json();
+    return data.items;
   }
 }
