@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Artist from '../components/Artist';
-import Footer from './../Footer';
+import Footer from '../components/Footer';
 import ClipLoader from 'react-spinners/ClipLoader';
 import ScrollBar from 'react-scrollbars-custom';
 import SpotifyWebApi from "spotify-web-api-js";
-import { getTopArtists } from './../spotifyApiClient';
+import { getTopArtists } from '../api/spotifyApiClient';
+import './../App.css'
 
 export default function Stats() {
     const [topArtists, setTopArtists] = useState([]);

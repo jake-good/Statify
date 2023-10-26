@@ -14,10 +14,10 @@ export async function login() {
     url += "&scope=" + encodeURIComponent(scope);
     url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
     url += "&state=" + encodeURIComponent(state);
-    window.location = url;
+    window.location.href = url;
 }
 
-export async function getTopArtists(time_range) {
+export async function getTopArtists(time_range: string) {
     return spotifyApi
     .getMyTopArtists({
       time_range: time_range,
@@ -25,7 +25,7 @@ export async function getTopArtists(time_range) {
     });
 }
 
- function generateRandomString(length) {
+ function generateRandomString(length: number) {
     var text = "";
     var possible =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

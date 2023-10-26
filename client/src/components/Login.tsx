@@ -1,15 +1,10 @@
 import React from "react";
-import { login } from './spotifyApiClient';
+import { login } from "../api/spotifyApiClient";
 
-class Login extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
-  render() {
+export default function Login() {
+    
     return (
-      <div className="login_container">
+        <div className="login_container">
         <h1 id="main_title">Statify</h1>
 
         <p className="login_info_text">
@@ -22,8 +17,5 @@ class Login extends React.Component {
           GO TO SPOTIFY LOGIN
         </button>
       </div>
-    );
-  }
+    )
 }
-
-export default Login;
