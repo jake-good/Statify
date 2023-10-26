@@ -9,6 +9,7 @@ import "font-awesome/css/font-awesome.min.css";
 import Root from './routes/root'
 import ErrorPage from './routes/error-page';
 import Stats from './routes/stats';
+import Redirect from "./routes/redirect";
 
 const router = createBrowserRouter([
     {
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
     {
       path: "*",
       element: <Navigate to='/' />
+    },{
+      path: 'redirect',
+      element: <Redirect />
     }
+
   ]);
 
 ReactDOM.render(<RouterProvider router={router} />, document.getElementById("root"));

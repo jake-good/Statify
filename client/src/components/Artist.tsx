@@ -1,8 +1,9 @@
 import React from 'react';
 import {useState } from 'react';
+import { SpotifyArtist } from '../models/apimodels';
 
 type Props = {
-    artist: SpotifyApi.ArtistObjectFull;
+    artist: SpotifyArtist;
 }
 
 export default function Artist({ artist }: Props): React.JSX.Element {

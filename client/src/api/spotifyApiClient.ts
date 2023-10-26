@@ -1,36 +1,99 @@
-import SpotifyWebApi from "spotify-web-api-js";
-const spotifyApi = new SpotifyWebApi();
+import { base64encode, generateRandomString, sha256 } from "./helpers";
 
-export async function login() {
-    var client_id = "d8c9e8ca3c784898bdf939f51ff6136f"; // Your client id
-    var redirect_uri = window.location.href + 'stats';
-    var state = generateRandomString(16);
-    var stateKey = "spotify_auth_state";
-    localStorage.setItem(stateKey, state);
-    var scope = "user-top-read";
-    var url = "https://accounts.spotify.com/authorize";
-    url += "?response_type=token";
-    url += "&client_id=" + encodeURIComponent(client_id);
-    url += "&scope=" + encodeURIComponent(scope);
-    url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
-    url += "&state=" + encodeURIComponent(state);
-    window.location.href = url;
-}
+export class SpotifyApiClient {
 
-export async function getTopArtists(time_range: string) {
-    return spotifyApi
-    .getMyTopArtists({
-      time_range: time_range,
-      limit: '50'
-    });
-}
+  private static instance: SpotifyApiClient;
 
- function generateRandomString(length: number) {
-    var text = "";
-    var possible =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < length; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
+  private constructor() {
   }
+
+  public static getInstance(): SpotifyApiClient {
+    if (!this.instance) {
+      this.instance = new SpotifyApiClient();
+    }
+    return this.instance;
+  }
+
+  private getRedirectUri = () => {
+    return window.location.href.includes('localhost') ? 'http://localhost:3000/redirect' : 'https://statify-jake.netlify.app/redirect';
+  }
+
+  login = async () => {
+    const codeVerifier  = generateRandomString(64);
+    const hashed = await sha256(codeVerifier);
+    const codeChallenge = base64encode(hashed);
+  
+    const clientId = 'd8c9e8ca3c784898bdf939f51ff6136f';
+    const redirectUri = this.getRedirectUri();
+  
+    const scope = 'user-top-read';
+    const authUrl = new URL("https://accounts.spotify.com/authorize")
+  
+    // generated in the previous step
+    window.localStorage.setItem('code_verifier', codeVerifier);
+  
+    const params =  {
+      response_type: 'code',
+      client_id: clientId,
+      scope,
+      code_challenge_method: 'S256',
+      code_challenge: codeChallenge,
+      redirect_uri: redirectUri,
+    }
+  
+    authUrl.search = new URLSearchParams(params).toString();
+    window.location.href = authUrl.toString();
+  }
+  
+  decodeUrlAndGetToken = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    let code = urlParams.get('code');
+    if (code) return await this.getToken(code);
+  }
+  
+  private getToken = async (code: string) => {
+    let codeVerifier = localStorage.getItem('code_verifier') || undefined;
+    const clientId: string = 'd8c9e8ca3c784898bdf939f51ff6136f';
+    const redirectUri = this.getRedirectUri();
+    const url = new URL("https://accounts.spotify.com/api/token")
+    const payload = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        client_id: clientId,
+        grant_type: 'authorization_code',
+        code,
+        redirect_uri: redirectUri,
+        code_verifier: codeVerifier,
+      } as any),
+    }
+  
+    const body = await fetch(url, payload);
+    const response =await body.json();
+    localStorage.setItem('access_token', response.access_token);
+  }  
+
+  getTopArtist = async (timeRange: string) => {
+    const token = localStorage.getItem('access_token');
+    
+    const apiUrl = 'https://api.spotify.com/v1/me/top/artists';
+    const limit = 50;
+    const offset = 0;
+
+    const url = `${apiUrl}?time_range=${timeRange}&limit=${limit}&offset=${offset}`;
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    const response = await fetch(url, { method: 'GET', headers });
+    if (response.status === 200) {
+      const data = await response.json();
+      return data.items;
+    } else {
+      console.error(`Error: ${response.status} - ${await response.text()}`);
+    }
+  }
+}

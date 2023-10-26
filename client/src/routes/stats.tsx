@@ -1,39 +1,30 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Artist from '../components/Artist';
 import Footer from '../components/Footer';
 import ClipLoader from 'react-spinners/ClipLoader';
 import ScrollBar from 'react-scrollbars-custom';
-import SpotifyWebApi from "spotify-web-api-js";
-import { getTopArtists } from '../api/spotifyApiClient';
+import { SpotifyApiClient } from '../api/spotifyApiClient';
 import './../App.css'
 import React from 'react';
+import { SpotifyArtist } from '../models/apimodels';
 
 export default function Stats() {
-    const [topArtists, setTopArtists] = useState<SpotifyApi.ArtistObjectFull[]>([]);
+    const [topArtists, setTopArtists] = useState<SpotifyArtist[]>([]);
     const [timeRange, setTimeRange] = useState('medium_term');
     const [loading, setLoading] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
-    const navigate = useNavigate();
+    const client = SpotifyApiClient.getInstance();
 
     useEffect(() => {
-        if (loggedIn) {
             setLoading(true);
-            getTopArtists(timeRange)
-                .then(response => {
-                setTopArtists(response.items);
-                setLoading(false);
-                });
-        }
-    },[loggedIn, timeRange]);
-
-    const spotifyApi = new SpotifyWebApi();
-    const params = getHashParams();
-    const token = params.access_token;
-    if (token && !loggedIn) {
-      spotifyApi.setAccessToken(token);
-      setLoggedIn(true);
-    }
+            client.getTopArtist(timeRange)
+                .then(
+                  response => {
+                  setTopArtists(response);
+                  setLoading(false);
+                }
+              );
+    },[client, timeRange]);
 
     function buildArtists() {
         let Artists = topArtists.map(item => <Artist artist={item} key={item.id+Date.now()}/>);
@@ -42,9 +33,7 @@ export default function Stats() {
 
     let Container;
     let Head;
-    if (!loggedIn) {
-      navigate('/');
-    } else {
+
       Container = <div className="artists-container">
         {
           loading ? <ClipLoader color={'#1db954'} size={20}/> : <ScrollBar>{buildArtists()}</ScrollBar>
@@ -72,7 +61,6 @@ export default function Stats() {
           </div>
           
       );
-    }
 
     return (
         <div className="App">
@@ -82,18 +70,3 @@ export default function Stats() {
       </div>
     )
 };
-
-function getHashParams() {
-    var hashParams: HashParams = {};
-    var e,
-      r = /([^&;=]+)=?([^&;]*)/g,
-      q = window.location.hash.substring(1);
-    while ((e = r.exec(q))) {
-      (hashParams as any)[e[1]] = decodeURIComponent(e[2]);
-    }
-    return hashParams;
-}
-
-type HashParams = {
-  access_token?: string;
-}
