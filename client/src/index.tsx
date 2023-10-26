@@ -5,7 +5,6 @@ import {
     RouterProvider,
     Navigate
   } from "react-router-dom";
-import "./index.css";
 import "font-awesome/css/font-awesome.min.css";
 import Root from './routes/root'
 import ErrorPage from './routes/error-page';

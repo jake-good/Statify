@@ -2,7 +2,7 @@ import React from 'react';
 import {useState } from 'react';
 
 type Props = {
-    artist: ArtistData;
+    artist: SpotifyApi.ArtistObjectFull;
 }
 
 type ArtistData = {

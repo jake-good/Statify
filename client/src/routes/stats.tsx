@@ -7,9 +7,10 @@ import ScrollBar from 'react-scrollbars-custom';
 import SpotifyWebApi from "spotify-web-api-js";
 import { getTopArtists } from '../api/spotifyApiClient';
 import './../App.css'
+import React from 'react';
 
 export default function Stats() {
-    const [topArtists, setTopArtists] = useState([]);
+    const [topArtists, setTopArtists] = useState<SpotifyApi.ArtistObjectFull[]>([]);
     const [timeRange, setTimeRange] = useState('medium_term');
     const [loading, setLoading] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
@@ -83,12 +84,16 @@ export default function Stats() {
 };
 
 function getHashParams() {
-    var hashParams = {};
+    var hashParams: HashParams = {};
     var e,
       r = /([^&;=]+)=?([^&;]*)/g,
       q = window.location.hash.substring(1);
     while ((e = r.exec(q))) {
-      hashParams[e[1]] = decodeURIComponent(e[2]);
+      (hashParams as any)[e[1]] = decodeURIComponent(e[2]);
     }
     return hashParams;
+}
+
+type HashParams = {
+  access_token?: string;
 }
