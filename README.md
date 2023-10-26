@@ -1,7 +1,7 @@
 # Statify
-A React app using the Spotify API to get a users top artists. Log in with your Spotify account and view your top artists over various time ranges. Hosted live via github pages: https://jake-good.github.io/Statify/
+A React app using the Spotify API to get a users top artists. Log in with your Spotify account and view your top artists over various time ranges. Hosted live via netlify [here!](https://statify-jake.netlify.app/)
 
-Features
+### Features
 - Lightweight client to interface with the Spotify Api
   - OAuth2 Authentication using PKCE flow
   - Fetching User top artists data
