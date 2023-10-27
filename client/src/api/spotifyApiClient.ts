@@ -78,14 +78,14 @@ export class SpotifyApiClient {
     localStorage.setItem('access_token', response.access_token);
   }  
 
-  getTopArtist = async (timeRange: string) => {
+  getTopArtist = async (timeRange: string, type: string = 'artists') => {
     const token = localStorage.getItem('access_token');
 
     if (token == null) {
       throw new Error('Unable to find access token, try loggin in again');
     }
     
-    const apiUrl = 'https://api.spotify.com/v1/me/top/artists';
+    const apiUrl = `https://api.spotify.com/v1/me/top/${type}`;
     const limit = 50;
     const offset = 0;
 
