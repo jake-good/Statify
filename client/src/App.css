@@ -67,7 +67,7 @@
 .button_container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   width: 50%;
   padding: 10px 25% 50px 25%;
 }
@@ -111,6 +111,7 @@
   color: #838383;
   font-size: 0.95em;
   line-height: 1.5em;
+  text-align: center;
 }
 
 .login_button {
@@ -121,6 +122,20 @@
   background-color: white;
   font-weight: 600;
   margin-top: 40px;
+}
+
+.buttonDefault {
+  background-color: white;
+  color: black;
+  border: 1px black solid;
+}
+
+.buttonDefault:hover,
+.buttonDefault.selected {
+  background-color: #1db954;
+  color: white;
+  border: 1px #1db954 solid;
+  cursor: pointer;
 }
 
 p {
@@ -238,7 +253,11 @@ p {
   }
 
   .button_container {
-    padding: 0;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .artist_container {
     width: 100%;
   }
 
@@ -253,16 +272,12 @@ p {
   }
 
   .unexpanded_artist_title {
-    height: auto;
+    height: 50px;
+    font-size: 5vw;
   }
 
-  .unexpanded_artist_title:after {
-    content: ""; /* This is necessary for the pseudo element to work. */
-    display: block; /* This will put the pseudo element on its own line. */
-    margin: 0 auto; /* This will center the border. */
-    width: 70%; /* Change this to whatever width you want. */ /* This creates some space between the element and the border. */
-    padding-top: 5px;
-    border-bottom: 1px solid rgb(231, 231, 231); /* This creates the border. Replace black with whatever color you want. */
+  .artists-container {
+    width: 100%;
   }
 
   .img_box {
@@ -289,4 +304,37 @@ p {
   #spotify_link_button i {
     padding: 5px 0;
   }
+}
+
+.errorPageDiv {
+  height: 80vh;
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  align-content: space-around;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.errorPageDiv button {
+  border-radius: 20px;
+  width: 20%;
+  height: 2em;
+  font-weight: 500;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }

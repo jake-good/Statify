@@ -1,15 +1,10 @@
 import React from "react";
-import { login } from './spotifyApiClient';
+import { SpotifyApiClient } from "../api/spotifyApiClient";
 
-class Login extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
-  render() {
+export default function Login() {
+    let client = SpotifyApiClient.getInstance();
     return (
-      <div className="login_container">
+        <div className="login_container">
         <h1 id="main_title">Statify</h1>
 
         <p className="login_info_text">
@@ -18,12 +13,9 @@ class Login extends React.Component {
           used for authentication. To find out your listening info click the
           button below and log in to your account.
         </p>
-        <button className="login_button buttonDefault" onClick={login}>
+        <button className="login_button buttonDefault" onClick={() => client.login()}>
           GO TO SPOTIFY LOGIN
         </button>
       </div>
-    );
-  }
+    )
 }
-
-export default Login;
