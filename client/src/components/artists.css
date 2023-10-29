@@ -1,0 +1,67 @@
+/* ArtistsList.css */
+.container {
+    text-align: center;
+    margin: 2rem;
+  }
+  
+  h1 {
+    font-size: 32px;
+    color: #1db954;
+    margin-bottom: 1rem;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  
+  li {
+    background: #f7f7f7; /* Light gray background */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  li:hover {
+    transform: translateY(-5px);
+    background: #1db954; /* Green background on hover */
+    color: #fff; /* White text on hover */
+  }
+  
+  img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  p.name {
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+    padding: 1rem;
+  }
+  
+  p.genres {
+    font-size: 14px;
+    color: #666;
+    padding: 0 1rem;
+  }
+  
+  p.popularity {
+    font-size: 14px;
+    color: #666;
+    padding: 0 1rem;
+  }
+  
+  p.followers {
+    font-size: 14px;
+    color: #666;
+    padding: 0 1rem 1rem;
+  }
+  
