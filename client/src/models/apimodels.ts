@@ -19,4 +19,17 @@ export interface SpotifyArtist {
     type: string;
     uri: string;
   }
+
+  export interface SpotifySong {
+    id: string;
+    name: string;
+    album: {
+      images: { url: string }[];
+    };
+    artists: { name: string }[];
+    external_urls: {
+      spotify: string;
+    };
+    genres: string[];
+  }
   

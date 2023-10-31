@@ -1,10 +1,13 @@
 import { base64encode, generateRandomString, sha256 } from "./helpers";
+import config from './../../config.json';
 
 export class SpotifyApiClient {
 
   private static instance: SpotifyApiClient;
+  private clientId: string;
 
   private constructor() {
+    this.clientId = config.clientId;
   }
 
   public static getInstance(): SpotifyApiClient {
@@ -23,7 +26,6 @@ export class SpotifyApiClient {
     const hashed = await sha256(codeVerifier);
     const codeChallenge = base64encode(hashed);
   
-    const clientId = 'd8c9e8ca3c784898bdf939f51ff6136f';
     const redirectUri = this.getRedirectUri();
   
     const scope = 'user-top-read';
@@ -34,7 +36,7 @@ export class SpotifyApiClient {
   
     const params =  {
       response_type: 'code',
-      client_id: clientId,
+      client_id: this.clientId,
       scope,
       code_challenge_method: 'S256',
       code_challenge: codeChallenge,
@@ -53,7 +55,6 @@ export class SpotifyApiClient {
   
   private getToken = async (code: string) => {
     let codeVerifier = localStorage.getItem('code_verifier') || undefined;
-    const clientId: string = 'd8c9e8ca3c784898bdf939f51ff6136f';
     const redirectUri = this.getRedirectUri();
     const url = new URL("https://accounts.spotify.com/api/token")
     const payload = {
@@ -62,7 +63,7 @@ export class SpotifyApiClient {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        client_id: clientId,
+        client_id: this.clientId,
         grant_type: 'authorization_code',
         code,
         redirect_uri: redirectUri,

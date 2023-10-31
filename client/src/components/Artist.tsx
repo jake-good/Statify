@@ -1,47 +1,57 @@
-import React from 'react';
-import {useState } from 'react';
-import { SpotifyArtist } from '../models/apimodels';
+import React from "react";
+import { useState } from "react";
+import { SpotifyArtist } from "../models/apimodels";
 
-type Props = {
-    artist: SpotifyArtist;
+type ArtistsProps = {
+  artists: SpotifyArtist[];
+};
+
+export default function Artists({ artists }: ArtistsProps): React.JSX.Element {
+  return (
+    <div className="container">
+      <ul>
+        {artists.map((artist) => (
+          <Artist artist={artist} />
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-export default function Artist({ artist }: Props): React.JSX.Element {
-    const [expanded, setExpanded] = useState(false);
+type ArtistPropss = {
+  artist: SpotifyArtist;
+};
 
-    function toggle() {
-        setExpanded(!expanded);
-    }
+function Artist({ artist }: ArtistPropss): React.JSX.Element {
+  const [expanded, setExpanded] = useState(false);
 
-    let genresList = "";
-    for (var genre in artist.genres) {
-        genresList += artist.genres[genre] + ", ";
-    }
+  function toggle() {
+    setExpanded(!expanded);
+  }
 
-    return(
-        <div className="Artist" onClick={() => toggle()}>
-            {expanded ? <div className="expanded_artist">
-          <section className="img_box">
-            <img src={artist.images[0].url} alt='artist'/>
-          </section>
-          <div className="artist_details">
-            <h1 id="expanded_title">{artist.name}</h1>
-            <p id="expand_details">
-              Followers: {artist.followers.total}
-            </p>
-            <p id="expand_details">Genres: {genresList}</p>
-          </div>
-          <a
-            id="spotify_link_button"
-            href={artist.external_urls.spotify}
-            target="blank"
-            title="Go to artist's spotify page"
-          >
-            <i className="fa fa-spotify fa-2x" />
-          </a>
-        </div> : <div className="unexpanded_artist_title">
-          <p>{artist.name}</p>
-        </div>}
-        </div>
-        );
+  function handleLink(e: React.MouseEvent<HTMLElement>) {
+    e.stopPropagation();
+    window.open(artist.external_urls.spotify, "_blank", "noreferrer");
+  }
+
+  const expandedView = (
+    <div className="artist expanded" key={artist.id} onClick={() => toggle()}>
+      <img src={artist.images[0].url} alt={artist.name} />
+      <div className="artist-info">
+        <p className="name">{artist.name}</p>
+        <p className="genres">Genres: {artist.genres.join(", ")}</p>
+        <button className="primary" onClick={handleLink}>
+          <i className="fa fa-spotify" /> Find on Spotify
+        </button>
+      </div>
+    </div>
+  );
+
+  const unExpandedView = (
+    <div className="artist unexpanded" key={artist.id} onClick={() => toggle()}>
+      <p>{artist.name}</p>
+    </div>
+  );
+
+  return expanded ? expandedView : unExpandedView;
 }
