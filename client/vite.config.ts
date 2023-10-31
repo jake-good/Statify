@@ -12,4 +12,13 @@ export default defineConfig({
         // this sets a default port to 3000  
         port: 3000, 
     },
+    css: {
+        preprocessorOptions: {
+          less: {
+            math: "always",
+            relativeUrls: true,
+            javascriptEnabled: true
+          },
+        },
+      }
 })

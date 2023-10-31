@@ -1,0 +1,143 @@
+
+  //  @text: #010402,
+  //  @background: #f7fdf8,
+  //  @primary: #46e27c,
+  //  @secondary: #e5faec,
+  //  @accent: #dc38a2,
+
+@text: #fbfefc;
+@background: #020803;
+@primary: #1db954;
+@secondary: #051a0c;
+@accent: #c7238e;
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+ }
+
+#root {
+  height: 100vh;
+  background: @background;
+  color: @text;
+}
+
+button {
+  padding: 7px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+
+  &.primary {
+    border: 1px solid @primary;
+    background: @background;
+    color: @primary;
+    &:hover {
+      background: @primary;
+      color: @background;
+      transition: 0.2s;
+    }
+  }
+
+  &.selected {
+    border: 1px solid @primary;
+    background: @primary;
+    color: @background;
+  }
+
+  &.secondary {
+    border: 1px solid @accent;
+    background: @background;
+    color: @accent;
+    &:hover {
+      background: @accent;
+      color: @background;
+      transition: 0.2s;
+    }
+  }
+  
+}
+
+#footer {
+  height: 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#main_title {
+  font-size: calc(4vw + 4em);
+  font-weight: 500;
+  font-style: italic;
+}
+
+#login-page {
+  max-width: 500px;
+  margin: 0px 20px;
+  
+  .login_info_text {
+    padding: 30px 0;
+  }
+}
+
+#stats-page {
+  margin: 0px 20px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+
+  .button-container {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: row;
+    gap: 20px
+  }
+
+  .artists-container, .songs-container {
+    font-size: 35px;
+    
+    .artist {
+      color: @text;
+      
+      &:hover {
+        background: @secondary;
+        cursor: pointer;
+      }
+
+      &.expanded {
+        height: 25vh;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        img {
+          height: 90%;
+        }
+
+        .artist-info {
+          height: 90%;
+          padding-left: 20px;
+          max-width: 500px;
+
+          .name {
+            color: @accent;
+          }
+
+          .genres, .artists {
+            font-size: 15px;
+          }
+        }
+      }
+      &.unexpanded {
+        padding: 3px 0;
+      }
+    }
+  }
+}
+
+#logout {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+

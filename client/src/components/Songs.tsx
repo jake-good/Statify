@@ -1,31 +1,58 @@
-import React from 'react';
-import './songs.css';
+import React, { useState } from "react";
+import { SpotifySong } from "../models/apimodels";
 
-export interface Song {
-  id: string;
-  name: string;
-  album: {
-    images: { url: string }[];
-  };
-  artists: { name: string }[];
-}
+type SongsProps = {
+  topSongs: SpotifySong[];
+};
 
-type Props = {
-    topSongs: Song[]
-}
-
-export default function Songs({ topSongs }: Props): React.JSX.Element {
+export default function Songs({ topSongs }: SongsProps): React.JSX.Element {
   return (
-    <div className="container">
+    <div className="songs-container">
       <ul>
         {topSongs.map((song) => (
-          <li key={song.id}>
-            <img src={song.album.images[0].url} alt={song.name} />
-            <p className="name">{song.name}</p>
-            <p className="artist">{song.artists[0].name}</p>
-          </li>
+          <Song song={song} />
         ))}
       </ul>
     </div>
   );
+}
+
+type SongProps = {
+  song: SpotifySong;
 };
+
+function Song({ song }: SongProps): React.JSX.Element {
+  const [expanded, setExpanded] = useState(false);
+
+  function toggle() {
+    setExpanded(!expanded);
+  }
+
+  function handleLink(e: React.MouseEvent<HTMLElement>) {
+    e.stopPropagation();
+    window.open(song.external_urls.spotify, "_blank", "noreferrer");
+  }
+
+  const expandedView = (
+    <div className="artist expanded" key={song.id} onClick={() => toggle()}>
+      <img src={song.album.images[0].url} alt={song.name} />
+      <div className="artist-info">
+        <p className="name">{song.name}</p>
+        <p className="artists">
+          by {song.artists.map((artist) => artist.name).join(", ")}
+        </p>
+        <button className="primary" onClick={handleLink}>
+          <i className="fa fa-spotify" /> Find on Spotify
+        </button>
+      </div>
+    </div>
+  );
+
+  const unExpandedView = (
+    <div className="artist unexpanded" key={song.id} onClick={() => toggle()}>
+      <p>{song.name}</p>
+    </div>
+  );
+
+  return expanded ? expandedView : unExpandedView;
+}
