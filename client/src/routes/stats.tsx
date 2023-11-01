@@ -42,7 +42,7 @@ export default function Stats() {
   };
 
   return (
-    <div id="stats-page">
+    <div id="root-page">
       <div className="header">
         <h1 id="main_title">Statify</h1>
         <div>
@@ -88,7 +88,6 @@ export default function Stats() {
         </div>
       </div>
 
-      {/* Conditional rendering based on 'type' */}
       <div className="artists-container">
         {loading ? (
           <div className="loading-indicator">
