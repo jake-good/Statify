@@ -1,15 +1,32 @@
 
-  //  @text: #010402,
-  //  @background: #f7fdf8,
-  //  @primary: #46e27c,
-  //  @secondary: #e5faec,
-  //  @accent: #dc38a2,
+// @text: #010402,
+// @background: #f7fdf8,
+// @primary: #46e27c,
+// @secondary: #e5faec,
+// @accent: #dc38a2,
 
 @text: #fbfefc;
 @background: #020803;
 @primary: #1db954;
 @secondary: #051a0c;
 @accent: #c7238e;
+
+:root[data-theme="theme-light"] {
+  --text: #04150a;
+  --background: #f7fdf8;
+  --primary: #1db954;
+  --secondary: #e5faec;
+  --accent: #dc38a2;
+  --background-image: url('./layer2.svg');
+}
+:root[data-theme="theme-dark"] {
+  --text: #fbfefc;
+  --background: #020803;
+  --primary: #1db954;
+  --secondary: #051a0c;
+  --accent: #c7238e;
+  --background-image: url('./layer1.svg');
+}
 
 *{
   margin: 0;
@@ -20,14 +37,14 @@
 
 #root {
   height: 100vh;
-  background: @background;
-  color: @text;
+  background: var(--background);
+  color: var(--text);
   aspect-ratio: 900/450;
   width: 100%;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url('./layer1.svg');
+  background-image: var(--background-image);
 }
 
 button {
@@ -36,29 +53,29 @@ button {
   cursor: pointer;
 
   &.primary {
-    border: 1px solid @primary;
-    background: @background;
-    color: @primary;
+    border: 1px solid var(--primary);
+    background: var(--background);
+    color: var(--primary);
     &:hover {
-      background: @primary;
-      color: @background;
+      background: var(--primary);
+      color: var(--background);
       transition: 0.2s;
     }
   }
 
   &.selected {
-    border: 1px solid @primary;
-    background: @primary;
-    color: @background;
+    border: 1px solid var(--primary);
+    background: var(--primary);
+    color: var(--background);
   }
 
   &.secondary {
-    border: 1px solid @accent;
-    background: @background;
-    color: @accent;
+    border: 1px solid var(--accent);
+    background: var(--background);
+    color: var(--accent);
     &:hover {
-      background: @accent;
-      color: @background;
+      background: var(--accent);
+      color: var(--background);
       transition: 0.2s;
     }
   }
@@ -71,10 +88,10 @@ button {
   flex-direction: row;
   justify-content: center;
   p {
-    color: @accent;
+    color: var(--accent);
     a {
       text-decoration: none;
-      color: @accent;
+      color: var(--accent);
     }
   }
 }
@@ -126,6 +143,7 @@ button {
     flex-direction: row;
     justify-content: space-between;
     color: @primary;  
+    color: var(--primary);  
     font-size: 0.8em;
     padding: 5px 0;
     font-weight: 600;
@@ -153,7 +171,7 @@ button {
     font-size: 35px;
     
     .artist {
-      color: @text;
+      color: var(--text);
       
       &:hover.unexpanded {
         cursor: pointer;
@@ -176,7 +194,7 @@ button {
           max-width: 500px;
 
           .name {
-            color: @accent;
+            color: var(--accent);
           }
 
           .genres, .artists {
@@ -205,4 +223,3 @@ button {
   width: 100%;
   padding: 100px;
 }
-

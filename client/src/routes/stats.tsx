@@ -9,6 +9,7 @@ import { SpotifyArtist, SpotifySong } from "../models/apimodels";
 import Artists from "./../components/Artist";
 import Songs from "./../components/Songs";
 import { AccordianButton } from "../components/AccordianButton";
+import { DarkModeToggle } from "../components/DarkModeToggle";
 
 export default function Stats() {
   const [topArtists, setTopArtists] = useState<SpotifyArtist[]>([]);
@@ -108,6 +109,7 @@ export default function Stats() {
           />
         </div>
 
+        <DarkModeToggle />
         <Link to="/">
           <button id="logout" className="secondary">
             Log out
@@ -134,7 +136,6 @@ export default function Stats() {
           </ScrollBar>
         )}
       </div>
-
       <Footer />
     </div>
   );
