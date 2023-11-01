@@ -101,9 +101,35 @@ button {
   font-style: italic;
 }
 
-.loading-indicator {
-  width: 100%;
-  padding: 100px;
+.accordian-group {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 700px;
+}
+
+.accordian {
+  width: 330px;
+
+  .accordian-children {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .section-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: @primary;  
+    font-size: 0.8em;
+    padding: 5px 0;
+    font-weight: 600;
+  }
 }
 
 #root-page {
@@ -169,5 +195,14 @@ button {
   position: absolute;
   top: 20px;
   right: 20px;
+}
+
+.error-message {
+  font-size: 0.8em;
+}
+
+.loading-indicator {
+  width: 100%;
+  padding: 100px;
 }
 

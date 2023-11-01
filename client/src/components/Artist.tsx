@@ -9,11 +9,13 @@ type ArtistsProps = {
 export default function Artists({ artists }: ArtistsProps): React.JSX.Element {
   return (
     <div className="container">
-      <ul>
-        {artists.map((artist) => (
-          <Artist artist={artist} />
-        ))}
-      </ul>
+      {artists ? (
+        artists.map((artist) => <Artist artist={artist} key={artist.id} />)
+      ) : (
+        <p className="error-message">
+          Didn't recieve any data from the API. Try logging in again
+        </p>
+      )}
     </div>
   );
 }
@@ -35,7 +37,7 @@ function Artist({ artist }: ArtistPropss): React.JSX.Element {
   }
 
   const expandedView = (
-    <div className="artist expanded" key={artist.id} onClick={() => toggle()}>
+    <div className="artist expanded" onClick={() => toggle()}>
       <img src={artist.images[0].url} alt={artist.name} />
       <div className="artist-info">
         <p className="name">{artist.name}</p>
