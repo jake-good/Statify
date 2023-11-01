@@ -8,7 +8,7 @@ type SongsProps = {
 export default function Songs({ topSongs }: SongsProps): React.JSX.Element {
   return (
     <div className="songs-container">
-      {topSongs.length ? (
+      {topSongs ? (
         topSongs.map((song) => <Song song={song} key={song.id} />)
       ) : (
         <p className="error-message">
