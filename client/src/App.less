@@ -22,6 +22,12 @@
   height: 100vh;
   background: @background;
   color: @text;
+  aspect-ratio: 900/450;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url('./layer1.svg');
 }
 
 button {
@@ -64,6 +70,29 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  p {
+    color: @accent;
+    a {
+      text-decoration: none;
+      color: @accent;
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .artist-info {
+    overflow-y: hidden;
+
+    .name {
+      font-size: 20px;
+    }
+
+    .genres, .artists {
+      font-size: 15px;
+      max-height: 40%;
+      overflow: hidden;
+    }
+  }
 }
 
 #main_title {
@@ -72,20 +101,20 @@ button {
   font-style: italic;
 }
 
-#login-page {
-  max-width: 500px;
-  margin: 0px 20px;
-  
-  .login_info_text {
-    padding: 30px 0;
-  }
+.loading-indicator {
+  width: 100%;
+  padding: 100px;
 }
 
-#stats-page {
+#root-page {
   margin: 0px 20px;
   display: grid;
   grid-template-rows: auto 1fr auto;
   height: 100%;
+
+  .login_info_text {
+    padding: 30px 0;
+  }
 
   .button-container {
     margin: 15px 0;
@@ -100,9 +129,10 @@ button {
     .artist {
       color: @text;
       
-      &:hover {
-        background: @secondary;
+      &:hover.unexpanded {
         cursor: pointer;
+        transition: 0.3s;
+        color: #c7238e;
       }
 
       &.expanded {
