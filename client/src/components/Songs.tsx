@@ -8,11 +8,9 @@ type SongsProps = {
 export default function Songs({ topSongs }: SongsProps): React.JSX.Element {
   return (
     <div className="songs-container">
-      <ul>
-        {topSongs.map((song) => (
-          <Song song={song} />
-        ))}
-      </ul>
+      {topSongs.map((song) => (
+        <Song song={song} key={song.id} />
+      ))}
     </div>
   );
 }

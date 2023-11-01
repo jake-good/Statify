@@ -8,13 +8,14 @@ import "./../App.less";
 import { SpotifyArtist, SpotifySong } from "../models/apimodels";
 import Artists from "./../components/Artist";
 import Songs from "./../components/Songs";
+import { AccordianButton } from "../components/AccordianButton";
 
 export default function Stats() {
   const [topArtists, setTopArtists] = useState<SpotifyArtist[]>([]);
   const [topSongs, setTopSongs] = useState<SpotifySong[]>([]);
   const [timeRange, setTimeRange] = useState("medium_term");
   const [loading, setLoading] = useState(false);
-  const [type, setType] = useState("artists"); // Default to 'artists'
+  const [type, setType] = useState("artists");
   const [hasError, setHasError] = useState(false);
   const client = SpotifyApiClient.getInstance();
 
@@ -37,55 +38,81 @@ export default function Stats() {
       });
   }, [client, timeRange, type]);
 
-  const toggleType = () => {
+  const toggleType = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
     setType(type === "artists" ? "tracks" : "artists");
+  };
+
+  const changeTimeRange = (
+    newTimeRange: string,
+    e: React.MouseEvent<HTMLElement>
+  ) => {
+    e.stopPropagation();
+    setTimeRange(newTimeRange);
   };
 
   return (
     <div id="root-page">
       <div className="header">
         <h1 id="main_title">Statify</h1>
-        <div>
-          <div className="button-container">
-            <button
-              className={timeRange === "short_term" ? "selected " : "primary"}
-              onClick={() => setTimeRange("short_term")}
-            >
-              1 month
-            </button>
-            <button
-              className={timeRange === "medium_term" ? "selected " : "primary"}
-              onClick={() => setTimeRange("medium_term")}
-            >
-              3 months
-            </button>
-            <button
-              className={timeRange === "long_term" ? "selected " : "primary"}
-              onClick={() => setTimeRange("long_term")}
-            >
-              Several years
-            </button>
-          </div>
-          <div className="button-container">
-            <button
-              className={`primary ${type === "artists" ? "selected" : ""}`}
-              onClick={toggleType}
-            >
-              Top Artists
-            </button>
-            <button
-              className={`primary ${type === "tracks" ? "selected" : ""}`}
-              onClick={toggleType}
-            >
-              Top Songs
-            </button>
-          </div>
-          <Link to="/">
-            <button id="logout" className="secondary">
-              Log out
-            </button>
-          </Link>
+        <div className="accordian-group">
+          <AccordianButton
+            name={"TIME RANGE"}
+            children={
+              <>
+                <button
+                  className={
+                    timeRange === "short_term" ? "selected " : "primary"
+                  }
+                  onClick={(e) => changeTimeRange("short_term", e)}
+                >
+                  1 month
+                </button>
+                <button
+                  className={
+                    timeRange === "medium_term" ? "selected " : "primary"
+                  }
+                  onClick={(e) => changeTimeRange("medium_term", e)}
+                >
+                  3 months
+                </button>
+                <button
+                  className={
+                    timeRange === "long_term" ? "selected " : "primary"
+                  }
+                  onClick={(e) => changeTimeRange("long_term", e)}
+                >
+                  Several years
+                </button>
+              </>
+            }
+          />
+          <AccordianButton
+            name={"ARTISTS // TRACKS"}
+            children={
+              <>
+                <button
+                  className={`primary ${type === "artists" ? "selected" : ""}`}
+                  onClick={toggleType}
+                >
+                  Top Artists
+                </button>
+                <button
+                  className={`primary ${type === "tracks" ? "selected" : ""}`}
+                  onClick={toggleType}
+                >
+                  Top Songs
+                </button>
+              </>
+            }
+          />
         </div>
+
+        <Link to="/">
+          <button id="logout" className="secondary">
+            Log out
+          </button>
+        </Link>
       </div>
 
       <div className="artists-container">

@@ -106,6 +106,45 @@ button {
   padding: 100px;
 }
 
+.accordian-group {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 700px;
+}
+
+.accordian {
+  width: 330px;
+
+  .accordian-children {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  &.expanded {
+
+  }
+
+  &.collapsed {
+
+  }
+
+  .section-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: @primary;  
+    font-size: 0.8em;
+    padding: 5px 0;
+    font-weight: 600;
+  }
+}
+
 #root-page {
   margin: 0px 20px;
   display: grid;
