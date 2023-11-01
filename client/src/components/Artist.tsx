@@ -9,9 +9,13 @@ type ArtistsProps = {
 export default function Artists({ artists }: ArtistsProps): React.JSX.Element {
   return (
     <div className="container">
-      {artists.map((artist) => (
-        <Artist artist={artist} key={artist.id} />
-      ))}
+      {artists.length ? (
+        artists.map((artist) => <Artist artist={artist} key={artist.id} />)
+      ) : (
+        <p className="error-message">
+          Didn't recieve any data from the API. Try logging in again
+        </p>
+      )}
     </div>
   );
 }
