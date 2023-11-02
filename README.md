@@ -1,7 +1,7 @@
 # Statify
 A React app using the Spotify API to get a users top artists. Log in with your Spotify account and view your top artists over various time ranges. Hosted live via netlify [here!](https://statify-jake.netlify.app/)
 
-### Local Setup
+## Local Setup
   1.   Make a spotify developer account and get a client id. https://developer.spotify.com/
   2.   Add a new file to the client directory called config.json
 ```
@@ -18,7 +18,7 @@ A React app using the Spotify API to get a users top artists. Log in with your S
 ```
   5. `npm start` to run.
 
-### Features
+## Features
 - Lightweight client to interface with the Spotify Api
   - OAuth2 Authentication using PKCE flow
   - Fetching user top listening data; songs and artists
