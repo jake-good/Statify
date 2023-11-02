@@ -11,7 +11,13 @@ import Stats from "./routes/stats";
 import Redirect from "./routes/redirect";
 import Login from "./routes/Login";
 import "./App.less";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,6 +39,8 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.render(
-  <RouterProvider router={router} />,
+  <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router} />
+  </QueryClientProvider>,
   document.getElementById("root")
 );

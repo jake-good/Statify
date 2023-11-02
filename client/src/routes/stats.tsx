@@ -9,6 +9,7 @@ import { SpotifyArtist, SpotifySong } from "../models/apimodels";
 import Artists from "./../components/Artist";
 import Songs from "./../components/Songs";
 import { AccordianButton } from "../components/AccordianButton";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Stats() {
   const [topArtists, setTopArtists] = useState<SpotifyArtist[]>([]);
@@ -19,24 +20,29 @@ export default function Stats() {
   const [hasError, setHasError] = useState(false);
   const client = SpotifyApiClient.getInstance();
 
-  useEffect(() => {
-    setLoading(true);
-    client
-      .getTopArtist(timeRange, type)
-      .then((response) => {
-        if (type === "artists") {
-          setTopArtists(response);
-        } else if (type === "tracks") {
-          setTopSongs(response);
-        }
-        setLoading(false);
-        setHasError(false);
-      })
-      .catch(() => {
-        setLoading(false);
-        setHasError(true);
-      });
-  }, [client, timeRange, type]);
+  const { isLoading, isError, data, error } = useQuery({
+    queryKey: ["todos", timeRange, type],
+    queryFn: () => client.getTopArtist(timeRange, type),
+  });
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   client
+  //     .getTopArtist(timeRange, type)
+  //     .then((response) => {
+  //       if (type === "artists") {
+  //         setTopArtists(response);
+  //       } else if (type === "tracks") {
+  //         setTopSongs(response);
+  //       }
+  //       setLoading(false);
+  //       setHasError(false);
+  //     })
+  //     .catch(() => {
+  //       setLoading(false);
+  //       setHasError(true);
+  //     });
+  // }, [client, timeRange, type]);
 
   const toggleType = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -116,20 +122,20 @@ export default function Stats() {
       </div>
 
       <div className="artists-container">
-        {loading ? (
+        {isLoading ? (
           <div className="loading-indicator">
             <ClipLoader color={"#1db954"} size={20} />
           </div>
-        ) : hasError ? (
+        ) : isError ? (
           <p className="error-message">
             Unable to fetch user data from the API. Try logging in again.
           </p>
         ) : (
           <ScrollBar>
             {type === "artists" ? (
-              <Artists artists={topArtists} />
+              <Artists artists={data} />
             ) : (
-              <Songs topSongs={topSongs} />
+              <Songs topSongs={data} />
             )}
           </ScrollBar>
         )}

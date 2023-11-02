@@ -79,7 +79,7 @@ export class SpotifyApiClient {
     localStorage.setItem('access_token', response.access_token);
   }  
 
-  getTopArtist = async (timeRange: string, type: string = 'artists') => {
+  getTopArtist = async (timeRange: string, type: string = 'artists'): Promise<[]> => {
     const token = localStorage.getItem('access_token');
 
     if (token == null) {
