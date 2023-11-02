@@ -13,11 +13,8 @@ export function AccordianButton({ name, children }: AccordianButtonProps) {
   }
 
   return (
-    <div
-      className={`accordian ${expanded ? "expanded" : "collapsed"}`}
-      onClick={toggle}
-    >
-      <div className="section-title">
+    <div className={`accordian ${expanded ? "expanded" : "collapsed"}`}>
+      <div className="section-title" onClick={toggle}>
         <h2 className="sectionName">{name} </h2>
         {expanded ? (
           <i className="fa fa-chevron-up"></i>
