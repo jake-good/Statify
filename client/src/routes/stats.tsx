@@ -1,48 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import ClipLoader from "react-spinners/ClipLoader";
 import ScrollBar from "react-scrollbars-custom";
 import { SpotifyApiClient } from "../api/spotifyApiClient";
 import "./../App.less";
-import { SpotifyArtist, SpotifySong } from "../models/apimodels";
 import Artists from "./../components/Artist";
 import Songs from "./../components/Songs";
 import { AccordianButton } from "../components/AccordianButton";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Stats() {
-  const [topArtists, setTopArtists] = useState<SpotifyArtist[]>([]);
-  const [topSongs, setTopSongs] = useState<SpotifySong[]>([]);
   const [timeRange, setTimeRange] = useState("medium_term");
-  const [loading, setLoading] = useState(false);
   const [type, setType] = useState("artists");
-  const [hasError, setHasError] = useState(false);
   const client = SpotifyApiClient.getInstance();
 
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["todos", timeRange, type],
     queryFn: () => client.getTopArtist(timeRange, type),
   });
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   client
-  //     .getTopArtist(timeRange, type)
-  //     .then((response) => {
-  //       if (type === "artists") {
-  //         setTopArtists(response);
-  //       } else if (type === "tracks") {
-  //         setTopSongs(response);
-  //       }
-  //       setLoading(false);
-  //       setHasError(false);
-  //     })
-  //     .catch(() => {
-  //       setLoading(false);
-  //       setHasError(true);
-  //     });
-  // }, [client, timeRange, type]);
 
   const toggleType = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
