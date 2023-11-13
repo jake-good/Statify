@@ -1,46 +1,22 @@
-import React from "react";
 import ReactDOM from "react-dom";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "font-awesome/css/font-awesome.min.css";
-import ErrorPage from "./routes/error-page";
-import Stats from "./routes/stats";
-import Redirect from "./routes/redirect";
-import Login from "./routes/Login";
 import "./App.less";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "./context/AuthProvider";
+import App from "./components/App";
 
 const queryClient = new QueryClient();
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "stats",
-    element: <Stats />,
-  },
-  {
-    path: "*",
-    element: <Navigate to="/" />,
-  },
-  {
-    path: "redirect",
-    element: <Redirect />,
-  },
-]);
 
 ReactDOM.render(
-  <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
-  </QueryClientProvider>,
+  <BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <Routes>
+          <Route path="/*" element={<App></App>}></Route>
+        </Routes>
+      </AuthProvider>
+    </QueryClientProvider>
+  </BrowserRouter>,
   document.getElementById("root")
 );

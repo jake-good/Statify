@@ -3,21 +3,30 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import ClipLoader from "react-spinners/ClipLoader";
 import ScrollBar from "react-scrollbars-custom";
-import { SpotifyApiClient } from "../api/spotifyApiClient";
+import { SpotifyLoginClient } from "../api/spotifyApiClient";
 import "./../App.less";
 import Artists from "./../components/Artist";
 import Songs from "./../components/Songs";
 import { AccordianButton } from "../components/AccordianButton";
 import { useQuery } from "@tanstack/react-query";
+import { apiClientPrivate } from "../api/apiClient";
+import useApiPrivate from "../hooks/useApiPrivate";
 
 export default function Stats() {
   const [timeRange, setTimeRange] = useState("medium_term");
   const [type, setType] = useState("artists");
-  const client = SpotifyApiClient.getInstance();
+  const apiClient = useApiPrivate();
+
+  const getTopStats = async () => {
+    const res = await apiClient.get(
+      `me/top/${type}?time_range=${timeRange}&limit=50&offset=0`
+    );
+    return res.data.items;
+  };
 
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["todos", timeRange, type],
-    queryFn: () => client.getTopArtist(timeRange, type),
+    queryFn: () => getTopStats(),
   });
 
   const toggleType = (e: React.MouseEvent<HTMLElement>) => {

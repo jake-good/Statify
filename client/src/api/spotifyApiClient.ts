@@ -1,18 +1,18 @@
 import { base64encode, generateRandomString, sha256 } from "./helpers";
 import config from './../../config.json';
 
-export class SpotifyApiClient {
+export class SpotifyLoginClient {
 
-  private static instance: SpotifyApiClient;
+  private static instance: SpotifyLoginClient;
   private clientId: string;
 
   private constructor() {
     this.clientId = config.clientId;
   }
 
-  public static getInstance(): SpotifyApiClient {
+  public static getInstance(): SpotifyLoginClient {
     if (!this.instance) {
-      this.instance = new SpotifyApiClient();
+      this.instance = new SpotifyLoginClient();
     }
     return this.instance;
   }
@@ -76,28 +76,6 @@ export class SpotifyApiClient {
     if (response.access_token == null) {
       throw new Error('failed to fetch token');
     }
-    localStorage.setItem('access_token', response.access_token);
+    return response.access_token;
   }  
-
-  getTopArtist = async (timeRange: string, type: string = 'artists'): Promise<[]> => {
-    const token = localStorage.getItem('access_token');
-
-    if (token == null) {
-      throw new Error('Unable to find access token, try loggin in again');
-    }
-    
-    const apiUrl = `https://api.spotify.com/v1/me/top/${type}`;
-    const limit = 50;
-    const offset = 0;
-
-    const url = `${apiUrl}?time_range=${timeRange}&limit=${limit}&offset=${offset}`;
-
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-
-    const response = await fetch(url, { method: 'GET', headers });
-    const data = await response.json();
-    return data.items;
-  }
 }

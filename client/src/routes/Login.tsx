@@ -1,9 +1,9 @@
 import React from "react";
-import { SpotifyApiClient } from "../api/spotifyApiClient";
+import { SpotifyLoginClient } from "../api/spotifyApiClient";
 import Footer from "../components/Footer";
 
 export default function Login() {
-  let client = SpotifyApiClient.getInstance();
+  let client = SpotifyLoginClient.getInstance();
   return (
     <div id="root-page">
       <div className="header">
